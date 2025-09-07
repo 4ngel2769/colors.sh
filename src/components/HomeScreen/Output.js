@@ -7,6 +7,6 @@ const Line = ({ children, type = 'default' }) =>
 export default ({ lines }) => (
   <div className="output">
     <Line type="comment"># How to implement it</Line>
-    {lines.map((l, i) => <Line key={i}>{l}</Line>)}
+    {lines.map(l => <Line key={l}>{l}</Line>)}
   </div>
 );

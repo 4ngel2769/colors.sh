@@ -6,7 +6,11 @@ export default class RootContainer extends React.Component {
   render() {
     return (
       <div>
-        <span className="logo">🌈💻 Colors.sh</span>
+        <span className="logo">
+          <span role="img" aria-label="rainbow">🌈</span>
+          <span role="img" aria-label="laptop">💻</span>
+          Colors.sh
+        </span>
         <HomeScreen />
         <footer>
           <div className="github-buttons">

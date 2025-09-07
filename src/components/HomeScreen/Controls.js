@@ -6,28 +6,40 @@ import './Controls.scss';
 const themes = ['light', 'dark'];
 const escapeChars = ['\\033', '\\e', '\\x1B'];
 
-const FormatField = ({ formats, setFormat, format }) => (
-  <label>
-    <input
-      type="checkbox"
-      onChange={evt => setFormat(format.name, evt.target.checked)}
-      checked={!!formats.find(f => f.name === format.name)}
-    />
-    {format.name}
-  </label>
-);
+const FormatField = ({ formats, setFormat, format }) => {
+  const inputId = `format-checkbox-${format.name}`;
+  return (
+    <label htmlFor={inputId}>
+      <input
+        id={inputId}
+        type="checkbox"
+        onChange={evt => setFormat(format.name, evt.target.checked)}
+        checked={!!formats.find(f => f.name === format.name)}
+      />
+      {format.name}
+    </label>
+  );
+};
 
 const Settings = ({ terminalTheme, setTerminalTheme, escapeChar, setEscapeChar }) => (
   <div className="settings">
-    <label>
+    <label htmlFor="terminal-theme-select">
       Terminal theme:
-      <select value={terminalTheme} onChange={e => setTerminalTheme(e.target.value)}>
+      <select
+        id="terminal-theme-select"
+        value={terminalTheme}
+        onChange={e => setTerminalTheme(e.target.value)}
+      >
         {themes.map(t => <option key={t} value={t}>{t}</option>)}
       </select>
     </label>
-    <label>
+    <label htmlFor="escape-char-select">
       Escape character:
-      <select value={escapeChar} onChange={e => setEscapeChar(e.target.value)}>
+      <select
+        id="escape-char-select"
+        value={escapeChar}
+        onChange={e => setEscapeChar(e.target.value)}
+      >
         {escapeChars.map(c => <option key={c} value={c}>{c}</option>)}
       </select>
     </label>

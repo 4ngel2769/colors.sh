@@ -17,7 +17,9 @@
     }],
     "react/prop-types": "off",
     "function-paren-newline": "off",
-    "func-names": "off"
+    "func-names": "off",
+    "linebreak-style": 0,
+    "global-require": 0
   },
   "env": {
     "browser": true
