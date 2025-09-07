@@ -39,6 +39,10 @@ const store = setupUrlPersistedStore();
 const HomeScreen = () => {
   const { selectedColor, selectedBgColor, text } = store;
 
+  const handleTextChange = (newText) => {
+    store.setText(newText);
+  };
+
   return (
     <div className="home-screen">
       <div className="help app-text">
@@ -52,6 +56,7 @@ const HomeScreen = () => {
         bgColor={selectedBgColor.hex}
         formats={store.formats.map(f => f.name)}
         theme={store.terminalTheme}
+        onTextChange={handleTextChange}
       />
       <div className="app-text">
         <Output lines={store.outputLines} />

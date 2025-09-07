@@ -72,6 +72,10 @@ export default class Store {
     } else this[field] = {};
   }
 
+  @action setText(newText) {
+    this.text = newText;
+  }
+
   @computed get outputLines() {
     const { selectedColor, selectedBgColor, text, escapeChar } = this;
 

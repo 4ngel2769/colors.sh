@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import './Terminal.scss';
 
-export default ({ text, color, bgColor, formats, theme }) => {
+export default ({ text, color, bgColor, formats, theme, onTextChange }) => {
   const inverted = formats.includes('Invert');
   const dimmed = formats.includes('Dim');
   const finalFgColor = inverted ? bgColor : color;
   const finalBgColor = inverted ? color : bgColor;
   const style = { color: dimmed ? `${finalFgColor}7f` : finalFgColor, background: finalBgColor };
   const className = `text ${formats.map(f => `format-${f.toLowerCase()}`).join(' ')}`;
+  const editableRef = useRef();
+
+  useEffect(() => {
+    if (editableRef.current) {
+      editableRef.current.textContent = text;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleInput = (e) => {
+    if (onTextChange) onTextChange(e.currentTarget.textContent);
+  };
+
+  const handleBlur = (e) => {
+    if (onTextChange) onTextChange(e.currentTarget.textContent);
+  };
 
   return (
     <div className={`terminal ${theme}`}>
@@ -23,13 +39,14 @@ export default ({ text, color, bgColor, formats, theme }) => {
         <div className="body-inner-content">
           <span className="arrow">&gt;</span>
           <span
+            ref={editableRef}
             className={className}
             style={style}
             contentEditable
             suppressContentEditableWarning
-          >
-            {text}
-          </span>
+            onInput={handleInput}
+            onBlur={handleBlur}
+          />
         </div>
       </div>
     </div>
