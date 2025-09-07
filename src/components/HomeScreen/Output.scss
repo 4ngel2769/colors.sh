@@ -26,3 +26,21 @@
     color: var(--color-fg-muted, grey);
   }
 }
+
+.fmt-bold {
+  font-weight: bold;
+}
+.fmt-dim {
+  opacity: 0.6;
+}
+.fmt-underlined {
+  text-decoration: underline;
+}
+.fmt-invert {
+  filter: invert(1) hue-rotate(180deg);
+  background: #222;
+  color: #fff;
+}
+.fmt-hidden {
+  opacity: 0.50;
+}
