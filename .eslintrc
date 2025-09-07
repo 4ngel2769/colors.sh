@@ -19,7 +19,8 @@
     "function-paren-newline": "off",
     "func-names": "off",
     "linebreak-style": 0,
-    "global-require": 0
+    "global-require": 0,
+    "no-multi-spaces": 0
   },
   "env": {
     "browser": true

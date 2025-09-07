@@ -5,9 +5,11 @@
     font-size: 15px;
     line-height: 1em;
     cursor: pointer;
+    color: var(--color-fg-default);
   }
   .color-chooser > button, label {
     font-size: 15px;
+    color: var(--color-fg-default);
   }
   label input {
     margin-right: 5px;
@@ -27,9 +29,13 @@
 
     label {
       margin: 0 10px;
+      color: var(--color-fg-default);
     }
     select {
       margin-left: 5px;
+      background: var(--color-bg);
+      color: var(--color-fg-default);
+      border: 1px solid var(--color-fg-muted, #ccc);
     }
   }
 }

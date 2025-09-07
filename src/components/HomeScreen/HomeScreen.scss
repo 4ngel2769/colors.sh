@@ -6,7 +6,7 @@
 
   .help {
     margin-bottom: 20px;
-    color: grey;
+    color: var(--color-fg-muted, grey);
     font-weight: 100;
   }
 }

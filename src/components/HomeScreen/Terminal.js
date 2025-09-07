@@ -21,7 +21,7 @@ export default ({ text, color, bgColor, formats, theme }) => {
       </div>
       <div className="terminal-body">
         <div className="body-inner-content">
-          <span className="arrow">></span>
+          <span className="arrow">&gt;</span>
           <span
             className={className}
             style={style}

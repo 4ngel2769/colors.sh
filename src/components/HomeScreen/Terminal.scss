@@ -1,3 +1,12 @@
+:root {
+  --light-btn1: #FC625D;
+  --light-btn2: #FDBC40;
+  --light-btn3: #35CA4A;
+  --dark-btn1: #E35F39;
+  --dark-btn2: #75746D;
+  --dark-btn3: #75746D;
+}
+
 .output {
   display: flex;
   flex-direction: column;
@@ -6,10 +15,10 @@
 .terminal {
   display: flex;
   flex-direction: column;
-  margin: 50px auto 50px auto;
+  margin: 20px auto 50px auto;
   border-radius: 6px;
-  box-shadow: #b7b7b7 0 0 60px;
-  border: 1px solid #cccccc;
+  box-shadow: 0 0 40px var(--color-shadow, #b7b7b7);
+  // border: 1px solid #7b7b7b;
 
   .terminal-header {
     background: #DBD9DB;
@@ -29,13 +38,13 @@
       & > div {
         width: 14px;
         height: 14px;
-        background: red;
+        // background: red;
         border-radius: 50%;
         margin-left: 8px;
 
-        &:nth-child(1) { background: #FC625D; }
-        &:nth-child(2) { background: #FDBC40; }
-        &:nth-child(3) { background: #35CA4A; }
+        &:nth-child(1) { background: var(--light-btn1); }
+        &:nth-child(2) { background: var(--light-btn2); }
+        &:nth-child(3) { background: var(--light-btn3); }
       }
     }
   }
@@ -49,6 +58,7 @@
     font-family: monospace;
     padding: 10px;
     background: white;
+    border-radius: 0 0 5px 5px;
 
     .text {
       transition: all .15s ease-in;
@@ -67,19 +77,19 @@
 
 .terminal.dark {
   .terminal-header {
-    background: linear-gradient(to bottom, #58564E, #403F3A);
+    background: linear-gradient(to bottom, #51525b, #0f1522);
     color: white;
     font-weight: 500;
 
     .btns {
-      & > div:nth-child(1) { background: #E35F39; }
-      & > div:nth-child(2) { background: #75746D; }
-      & > div:nth-child(3) { background: #75746D; }
+      & > div:nth-child(1) { background: var(--dark-btn1); }
+      & > div:nth-child(2) { background: var(--dark-btn2); }
+      & > div:nth-child(3) { background: var(--dark-btn3); }
     }
   }
 
   .terminal-body {
-    background: #2F0B24;
+    background: var(--color-bar-black);
 
     .text {
       color: white;

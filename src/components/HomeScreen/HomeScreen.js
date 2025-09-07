@@ -16,7 +16,7 @@ const setupUrlPersistedStore = () => {
     try {
       initialState = JSON.parse(decodeURIComponent(settingsStr));
     } catch (e) {
-      console.warn('Failed to parse state');
+      // console.warn('Failed to parse state');
     }
   }
 
@@ -41,7 +41,7 @@ const HomeScreen = () => {
 
   return (
     <div className="home-screen">
-      <div className="help">
+      <div className="help app-text">
         Colors.sh helps you add colors and formatting to your bash scripts. <br />
         Pick some options to format the terminal&#39;s preview 👇
       </div>
@@ -53,7 +53,9 @@ const HomeScreen = () => {
         formats={store.formats.map(f => f.name)}
         theme={store.terminalTheme}
       />
-      <Output lines={store.outputLines} />
+      <div className="app-text">
+        <Output lines={store.outputLines} />
+      </div>
     </div>
   );
 };

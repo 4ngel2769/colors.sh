@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import RootContainer from './containers/RootContainer/RootContainer';
+import { ThemeProvider } from './components/HomeScreen/Theme';
 
 class ErrorReporter extends React.Component {
   render() {
@@ -17,7 +18,9 @@ class ErrorReporter extends React.Component {
 function render(Component = RootContainer) {
   ReactDOM.render(
     <AppContainer errorReporter={ErrorReporter}>
-      <Component />
+      <ThemeProvider>
+        <Component />
+      </ThemeProvider>
     </AppContainer>,
     document.getElementById('app'),
   );

@@ -1,5 +1,6 @@
 html, body {
   margin: 0;
+  background: var(--color-bg);
 }
 
 body {
@@ -12,7 +13,7 @@ button {
 }
 
 a, a:visited, a:active {
-  color: #1976D2;
+  color: var(--color-accent-fg, #1976D2);
   text-decoration: none;
 }
 
@@ -21,6 +22,7 @@ a, a:visited, a:active {
   top: 5px;
   left: 8px;
   font-weight: bold;
+  color: var(--color-accent-fg, inherit);
 }
 
 footer {
@@ -41,6 +43,10 @@ footer {
       text-align: right;
     }
   }
+}
+
+.app-text {
+  color: var(--color-fg-default);
 }
 
 @media (max-width: 500px) {

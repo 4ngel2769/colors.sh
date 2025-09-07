@@ -1,28 +1,28 @@
 .output {
   margin: 0 auto;
   text-align: left;
-  background-color: #1b346f;
-  color: white;
+  background-color: var(--color-bg-container);
+  color: var(--color-fg-default);
   padding: 20px;
   font-weight: 300;
   font-family: monospace;
   line-height: 1.6em;
   font-size: 14px;
   counter-reset: line;
-  box-shadow: #b7b7b7 0 0 60px;
+  box-shadow: 0 0 40px var(--color-shadow, #b7b7b7);
   border-radius: 5px;
 
   .line {
     display: flex;
   }
   .line-comment {
-    color: #798bb5;
+    color: var(--color-fg-muted, #798bb5);
   }
 
   .line::before {
     counter-increment: line;
     content: counter(line);
     margin-right: 10px;
-    color: grey;
+    color: var(--color-fg-muted, grey);
   }
 }
