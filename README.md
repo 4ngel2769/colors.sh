@@ -2,7 +2,7 @@
 
 Colors.sh helps you add colors and formatting to your bash scripts in a visual way, it looks like this:
 
-![Preview](www/full_preview.png)
+![Preview](public/full_preview.png)
 
 Go to http://colors.sh to try it out now!
 
