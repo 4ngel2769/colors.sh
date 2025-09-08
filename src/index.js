@@ -1,35 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { createRoot } from 'react-dom/client';
 import RootContainer from './containers/RootContainer/RootContainer';
 import { ThemeProvider } from './components/HomeScreen/Theme';
 
-class ErrorReporter extends React.Component {
-  render() {
-    return (
-      <div className="unrecoverable-error">
-        <b>Unrecoverable error:</b> {this.props.error.message}
-        {this.props.error.stack}
-      </div>
-    );
-  }
-}
+const container = document.getElementById('app');
+const root = createRoot(container);
 
-function render(Component = RootContainer) {
-  ReactDOM.render(
-    <AppContainer errorReporter={ErrorReporter}>
-      <ThemeProvider>
-        <Component />
-      </ThemeProvider>
-    </AppContainer>,
-    document.getElementById('app'),
-  );
-}
+root.render(
+  <ThemeProvider>
+    <RootContainer />
+  </ThemeProvider>,
+);
 
-render();
-
-if (module.hot) {
-  module.hot.accept('./containers/RootContainer/RootContainer', () => {
-    render(require('./containers/RootContainer/RootContainer').default);
-  });
-}
+setTimeout(() => {
+  document.documentElement.classList.remove('no-theme-transition');
+}, 0);

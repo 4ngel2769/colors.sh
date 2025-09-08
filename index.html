@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html
+  style="background:#23272e;color:#e6edf3;"
+>
+  <head>
+    <meta charset="utf-8">
+    <title>Colors.sh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/www/favicon.png">
+    <meta name="keywords" content=" bash, shell, colors, format, terminal, console, bold, underlined ">
+    <meta name="description" content="Colors.sh helps you add colors and formatting to your bash scripts.">
+    <meta property="og:image" content="https://colors.sh/preview.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65408411-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-65408411-4');
+    </script>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored || (systemDark ? 'dark' : 'light');
+          if (theme === 'dark') {
+            document.documentElement.style.background = '#23272e';
+            document.documentElement.style.color = '#e6edf3';
+          } else {
+            document.documentElement.style.background = '#fff';
+            document.documentElement.style.color = '#1f2328';
+          }
+          document.documentElement.classList.add('no-theme-transition');
+          var root = document.documentElement;
+          root.setAttribute('data-theme', theme);
+          var vars = theme === 'dark'
+            ? {
+                '--color-fg-default': '#e6edf3',
+                '--color-fg-muted': '#a4aebbff',
+                '--color-accent-fg': '#2f81f7',
+                '--color-bg': '#23272e',
+                '--color-bg-container': '#1b1d21ff',
+                '--color-shadow': 'rgba(24, 24, 25, 0.63)'
+              }
+            : {
+                '--color-success-emphasis': '#1f883d',
+                '--color-btn-primary-bg': '#1f883d',
+                '--color-btn-primary-hover-bg': '#2da44e',
+                '--color-fg-default': '#1f2328',
+                '--color-fg-muted': '#383c41ff',
+                '--color-bg': '#fff',
+                '--color-bg-container': '#e3e3e3ff',
+                '--color-shadow': 'rgba(183,183,183,0.4)'
+              };
+          for (var k in vars) root.style.setProperty(k, vars[k]);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <a href="https://github.com/messutied/colors.sh" class="fork-me-btn">
+      <img style="position: absolute; top: 0; right: 0; border: 0; width: 220px; height: auto;"
+      src="https://raw.githubusercontent.com/4ngel2769/web/refs/heads/main/assets/branding/github/strip-fork-me-gh-dark.png"
+      alt="Fork me on GitHub">
+    </a>
+    <script type="module" src="/src/index.js"></script>
+  </body>
+</html>

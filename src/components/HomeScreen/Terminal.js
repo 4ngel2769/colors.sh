@@ -14,7 +14,6 @@ export default ({ text, color, bgColor, formats, theme, onTextChange }) => {
     if (editableRef.current) {
       editableRef.current.textContent = text;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInput = (e) => {

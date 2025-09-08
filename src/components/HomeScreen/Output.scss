@@ -11,6 +11,7 @@
   counter-reset: line;
   box-shadow: 0 0 40px var(--color-shadow, #b7b7b7);
   border-radius: 5px;
+  transition: background 0.4s, color 0.4s;
 
   .line {
     display: flex;

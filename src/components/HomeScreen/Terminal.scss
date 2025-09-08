@@ -96,3 +96,10 @@
     }
   }
 }
+
+.terminal,
+.terminal .terminal-header,
+.terminal .terminal-body,
+.terminal .text {
+  transition: background 0.4s, color 0.4s;
+}

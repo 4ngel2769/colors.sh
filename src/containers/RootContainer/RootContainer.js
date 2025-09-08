@@ -1,31 +1,20 @@
 import React from 'react';
 import HomeScreen from '../../components/HomeScreen/HomeScreen';
 import './RootContainer.scss';
-import { useTheme } from '../../components/HomeScreen/Theme';
-
-function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  return (
-    <button
-      style={{ marginLeft: 16 }}
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      title="Toggle theme"
-    >
-      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-    </button>
-  );
-}
+import ThemeSwitch from '../../components/HomeScreen/ThemeSwitch';
 
 export default class RootContainer extends React.Component {
   render() {
     return (
       <div>
-        <span className="logo app-text">
-          <span role="img" aria-label="rainbow">🌈</span>
-          <span role="img" aria-label="laptop">💻</span>
-          Colors.sh
-          <ThemeToggle />
-        </span>
+        <div className="navbar">
+          <span className="logo app-text">
+            <span role="img" aria-label="rainbow">🌈</span>
+            <span role="img" aria-label="laptop">💻</span>
+            Colors.sh
+          </span>
+          <ThemeSwitch />
+        </div>
         <HomeScreen />
         <footer className="app-text">
           <div className="github-buttons">

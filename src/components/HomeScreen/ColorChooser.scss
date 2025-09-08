@@ -62,3 +62,7 @@ $xs-width: $xs-cell-size * $xs-n-cell-cols;
     }
   }
 }
+
+.color-chooser .colors button.color {
+  transition: background 0.4s, border-color 0.4s;
+}

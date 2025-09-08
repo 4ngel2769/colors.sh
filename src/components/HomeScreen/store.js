@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action, computed, makeObservable } from 'mobx';
 import colors from './colors-256';
 import formats from './formats';
 
@@ -20,14 +20,31 @@ class Color {
 }
 
 export default class Store {
-  @observable selectedColor = new Color(colors.find(c => c[0] === 'Black'));
-  @observable selectedBgColor = {};
-  @observable text = TEXT;
-  @observable formats = [];
-  @observable terminalTheme = 'light';
-  @observable escapeChar = '\\033';
+  selectedColor = new Color(colors.find(c => c[0] === 'Black'));
+  selectedBgColor = {};
+  text = TEXT;
+  formats = [];
+  terminalTheme = 'light';
+  escapeChar = '\\033';
 
   constructor(initialState) {
+    makeObservable(this, {
+      selectedColor: observable,
+      selectedBgColor: observable,
+      text: observable,
+      formats: observable,
+      terminalTheme: observable,
+      escapeChar: observable,
+      setColor: action,
+      setBgColor: action,
+      setFormat: action,
+      setTerminalTheme: action,
+      setEscapeChar: action,
+      setText: action,
+      setAColor: action,
+      outputLines: computed,
+    });
+
     if (initialState) {
       this.terminalTheme = initialState.terminalTheme;
       this.escapeChar = initialState.escapeChar;
@@ -40,11 +57,11 @@ export default class Store {
     this.setEscapeChar = this.setEscapeChar.bind(this);
   }
 
-  @action setColor(id) {
+  setColor(id) {
     this.setAColor('selectedColor', id);
   }
 
-  @action setTerminalTheme(theme) {
+  setTerminalTheme(theme) {
     // if changing to light theme and white bg, set bg to black
     if (theme === 'light' && this.selectedColor.id === 15) this.setColor(0);
     // else if changing to dark theme and black bg, set bg to white
@@ -52,31 +69,31 @@ export default class Store {
     this.terminalTheme = theme;
   }
 
-  @action setEscapeChar(escapeChar) {
+  setEscapeChar(escapeChar) {
     this.escapeChar = escapeChar;
   }
 
-  @action setBgColor(id) {
+  setBgColor(id) {
     this.setAColor('selectedBgColor', id);
   }
 
-  @action setFormat(name, enabled) {
+  setFormat(name, enabled) {
     if (enabled) this.formats = [...this.formats, formats.find(f => f.name === name)];
     else this.formats = this.formats.filter(f => f.name !== name);
   }
 
-  @action setAColor(field, id) {
+  setAColor(field, id) {
     if (id) {
       const color = colors.find(c => c[1] === Number(id));
       this[field] = new Color(color);
     } else this[field] = {};
   }
 
-  @action setText(newText) {
+  setText(newText) {
     this.text = newText;
   }
 
-  @computed get outputLines() {
+  get outputLines() {
     const { selectedColor, selectedBgColor, text, escapeChar } = this;
 
     const lines = [

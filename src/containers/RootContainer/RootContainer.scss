@@ -1,6 +1,12 @@
 html, body {
   margin: 0;
   background: var(--color-bg);
+  color: var(--color-fg-default);
+  transition: background 0.4s, color 0.4s;
+}
+
+* {
+  transition: background 0.4s, color 0.4s;
 }
 
 body {
@@ -17,12 +23,24 @@ a, a:visited, a:active {
   text-decoration: none;
 }
 
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px 10px 0 10px;
+  position: relative;
+}
+
 .logo {
-  position: absolute;
-  top: 5px;
-  left: 8px;
+  position: static;
   font-weight: bold;
   color: var(--color-accent-fg, inherit);
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
 }
 
 footer {
@@ -53,4 +71,8 @@ footer {
   .fork-me-btn img {
     display: none;
   }
+}
+
+.no-theme-transition *, .no-theme-transition, .no-theme-transition *:before, .no-theme-transition *:after {
+  transition: none !important;
 }
