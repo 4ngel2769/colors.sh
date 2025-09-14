@@ -8,9 +8,7 @@
     "test": "jest",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "prod:build": "vite build",
-    "prod:start": "vite preview"
+    "start": "vite preview"
   },
   "author": "Eduardo Messuti",
   "license": "ISC",
