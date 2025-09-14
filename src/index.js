@@ -9,7 +9,7 @@ const root = createRoot(container);
 root.render(
   <ThemeProvider>
     <RootContainer />
-  </ThemeProvider>,
+  </ThemeProvider>
 );
 
 setTimeout(() => {

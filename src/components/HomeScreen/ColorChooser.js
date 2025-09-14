@@ -1,61 +1,61 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import colors from './colors-256';
 import './ColorChooser.scss';
 
-const ColorBtn = ({ color: [name, id, hex], callback, selected }) => (
+const ColorBtn = React.memo(({ color: [name, id, hex], onSelect, selected }) => (
   <button
-    className={`color ${selected ? 'selected' : ''}`}
-    onClick={() => callback(id)}
+    className={`color${selected ? ' selected' : ''}`}
+    onClick={() => onSelect(id)}
     title={name}
     style={{ background: hex }}
+    type="button"
+    tabIndex={0}
+    aria-pressed={selected}
   />
-);
+));
 
-export default class ColorChooser extends React.Component {
-  constructor() {
-    super();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
+export default function ColorChooser({ label, callback, color }) {
+  const [isActive, setIsActive] = useState(false);
+  const ref = useRef(null);
 
-  state = { isActive: false };
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
-  handleClickOutside(event) {
-    if (this.state.isActive && this.ref && !this.ref.contains(event.target)) {
-      this.setState({ isActive: false });
+  const handleClickOutside = useCallback((event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setIsActive(false);
     }
-  }
+  }, []);
 
-  render() {
-    const { label, callback, color } = this.props;
-    const { isActive } = this.state;
-    const className = `color-chooser ${isActive ? 'active' : ''}`;
-    return (
-      <div className={className} ref={(el) => { this.ref = el; }}>
-        <button onClick={() => this.setState({ isActive: !isActive })}>
-          <span className="content">{label}</span>
-          <span className="arrow">⌄</span>
-        </button>
-        {
-          isActive &&
-          <div className="colors">
-            {colors.map(c => (
-              <ColorBtn
-                key={c[1]}
-                color={c}
-                callback={callback}
-                selected={c[1] === color.id}
-              />))}
-          </div>
-        }
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (isActive) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isActive, handleClickOutside]);
+
+  const handleToggle = () => setIsActive((active) => !active);
+
+  return (
+    <div className={`color-chooser${isActive ? ' active' : ''}`} ref={ref}>
+      <button
+        type="button"
+        onClick={handleToggle}
+        aria-haspopup="listbox"
+        aria-expanded={isActive}
+      >
+        <span className="content">{label}</span>
+        <span className="arrow">⌄</span>
+      </button>
+      {isActive && (
+        <div className="colors" role="listbox">
+          {colors.map((c) => (
+            <ColorBtn
+              key={c[1]}
+              color={c}
+              onSelect={callback}
+              selected={c[1] === color.id}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }

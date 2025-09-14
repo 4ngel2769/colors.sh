@@ -6,7 +6,7 @@ import './Controls.scss';
 const themes = ['light', 'dark'];
 const escapeChars = ['\\033', '\\e', '\\x1B'];
 
-const FormatField = ({ formats, setFormat, format }) => {
+const FormatField = React.memo(({ formats, setFormat, format }) => {
   const inputId = `format-checkbox-${format.name}`;
   return (
     <label htmlFor={inputId}>
@@ -19,9 +19,9 @@ const FormatField = ({ formats, setFormat, format }) => {
       {format.name}
     </label>
   );
-};
+});
 
-const Settings = ({ terminalTheme, setTerminalTheme, escapeChar, setEscapeChar }) => (
+const Settings = React.memo(({ terminalTheme, setTerminalTheme, escapeChar, setEscapeChar }) => (
   <div
     className="settings"
     style={{
@@ -59,19 +59,17 @@ const Settings = ({ terminalTheme, setTerminalTheme, escapeChar, setEscapeChar }
       </select>
     </label>
   </div>
-);
+));
 
-export default class Controls extends React.Component {
-  render() {
-    const { selectedColor, selectedBgColor, setColor, setBgColor, formats, setFormat } = this.props;
-    return (
-      <div className="controls">
-        <ColorChooser label="Foreground" callback={setColor} color={selectedColor} />
-        <ColorChooser label="Background" callback={setBgColor} color={selectedBgColor} />
-        {allFormats.map(format =>
-          <FormatField key={format.name} {...{ formats, setFormat, format }} />)}
-        <Settings {...this.props} />
-      </div>
-    );
-  }
+export default function Controls(props) {
+  const { selectedColor, selectedBgColor, setColor, setBgColor, formats, setFormat } = props;
+  return (
+    <div className="controls">
+      <ColorChooser label="Foreground" callback={setColor} color={selectedColor} />
+      <ColorChooser label="Background" callback={setBgColor} color={selectedBgColor} />
+      {allFormats.map(format =>
+        <FormatField key={format.name} formats={formats} setFormat={setFormat} format={format} />)}
+      <Settings {...props} />
+    </div>
+  );
 }

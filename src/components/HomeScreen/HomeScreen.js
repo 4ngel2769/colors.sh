@@ -2,46 +2,40 @@
 
 import React from 'react';
 import { autorun } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, useLocalObservable } from 'mobx-react';
 import Store from './store';
 import Terminal from './Terminal';
 import './HomeScreen.scss';
 import Output from './Output';
 import Controls from './Controls';
 
-const setupUrlPersistedStore = () => {
-  const settingsStr = window.location.hash.replace('#settings=', '');
-  let initialState;
-  if (settingsStr.length > 0) {
-    try {
-      initialState = JSON.parse(decodeURIComponent(settingsStr));
-    } catch (e) {
-      // console.warn('Failed to parse state');
+function useUrlPersistedStore() {
+  return useLocalObservable(() => {
+    const settingsStr = window.location.hash.replace('#settings=', '');
+    let initialState;
+    if (settingsStr.length > 0) {
+      try {
+        initialState = JSON.parse(decodeURIComponent(settingsStr));
+      } catch {
+        // Ignore parse errors
+      }
     }
-  }
-
-  const store = new Store(initialState);
-  let firstAutorunCalled = false;
-
-  autorun(() => {
-    const state = encodeURIComponent(JSON.stringify(store.toJSON()));
-    if (firstAutorunCalled) {
-      window.location.hash = `settings=${state}`;
-    }
-    firstAutorunCalled = true;
+    const store = new Store(initialState);
+    let firstAutorunCalled = false;
+    autorun(() => {
+      const state = encodeURIComponent(JSON.stringify(store.toJSON()));
+      if (firstAutorunCalled) {
+        window.location.hash = `settings=${state}`;
+      }
+      firstAutorunCalled = true;
+    });
+    return store;
   });
+}
 
-  return store;
-};
-
-const store = setupUrlPersistedStore();
-
-const HomeScreen = () => {
-  const { selectedColor, selectedBgColor, text } = store;
-
-  const handleTextChange = (newText) => {
-    store.setText(newText);
-  };
+const HomeScreen = observer(() => {
+  const store = useUrlPersistedStore();
+  const { selectedColor, selectedBgColor, text, formats, terminalTheme, outputLines, setText } = store;
 
   return (
     <div className="home-screen">
@@ -54,15 +48,15 @@ const HomeScreen = () => {
         text={text}
         color={selectedColor.hex}
         bgColor={selectedBgColor.hex}
-        formats={store.formats.map(f => f.name)}
-        theme={store.terminalTheme}
-        onTextChange={handleTextChange}
+        formats={formats.map(f => f.name)}
+        theme={terminalTheme}
+        onTextChange={setText}
       />
       <div className="app-text">
-        <Output lines={store.outputLines} />
+        <Output lines={outputLines} />
       </div>
     </div>
   );
-};
+});
 
-export default observer(HomeScreen);
+export default HomeScreen;
