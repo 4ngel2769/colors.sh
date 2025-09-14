@@ -7,9 +7,7 @@
 > It fixes bugs, modernizes the website and codebase, and adds new features and improvements while preserving the original _look & feel_ and functionality.
 
 ## About
-
 Colors.sh helps you add colors and formatting to your bash scripts in a visual way, it looks like this:
-
 ![Preview](/public/full_preview.png)
 
 <div align="center">
